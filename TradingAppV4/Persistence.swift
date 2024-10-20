@@ -15,7 +15,7 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         
         // 创建一些示例产品
-        let products = ["BTCUSDT", "ETHUSDT", "BNBUSDT"]
+        let products = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
         var createdProducts: [Product] = []
         for productName in products {
             let newProduct = Product(context: viewContext)
@@ -25,13 +25,13 @@ struct PersistenceController {
         }
         
         // 创建一些示例策略
-        let strategies = ["趋势跟随", "反转交易", "突破交易"]
+        let strategies = ["策略A", "策略B", "策略C"]
         var createdStrategies: [Strategy] = []
         for strategyName in strategies {
             let newStrategy = Strategy(context: viewContext)
             newStrategy.name = strategyName
             newStrategy.id = UUID()
-            newStrategy.content = "这是\(strategyName)策略的描述"
+            newStrategy.content = "這是\(strategyName)策略的描述"
             createdStrategies.append(newStrategy)
         }
         

@@ -3,12 +3,15 @@ import CoreData
 
 struct OpenTradesView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    // 使用 FetchRequest 從 Core Data 獲取未完成的交易
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Trade.entryDate, ascending: false)],
         predicate: NSPredicate(format: "exitDate == nil")
     ) private var openTrades: FetchedResults<Trade>
     
+    // 控制編輯視圖的顯示
     @State private var showingEditView = false
+    // 存儲當前選中的交易
     @State private var selectedTrade: Trade?
     
     var body: some View {
@@ -20,14 +23,14 @@ struct OpenTradesView: View {
                             Button(role: .destructive) {
                                 deleteTrade(trade)
                             } label: {
-                                Label("删除", systemImage: "trash")
+                                Label("刪除", systemImage: "trash")
                             }
                             
                             Button {
                                 selectedTrade = trade
                                 showingEditView = true
                             } label: {
-                                Label("编辑", systemImage: "pencil")
+                                Label("編輯", systemImage: "pencil")
                             }
                             .tint(.blue)
                         }
@@ -55,7 +58,7 @@ struct OpenTradesView: View {
         do {
             try viewContext.save()
         } catch {
-            print("删除交易失败: \(error)")
+            print("刪除失败: \(error)")
         }
     }
 }

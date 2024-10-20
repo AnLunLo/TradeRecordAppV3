@@ -22,14 +22,14 @@ struct ContentView: View {
             OpenTradesView()
                 .tabItem {
                     // 設置標籤項的圖標和文字
-                    Label("未完成", systemImage: "clock")
+                    Label("未平倉", systemImage: "clock")
                 }
                 .tag(0) // 設置標籤的標識符
             
             // 已完成交易視圖
             ClosedTradesView()
                 .tabItem {
-                    Label("已完成", systemImage: "checkmark.circle")
+                    Label("已結束", systemImage: "checkmark.circle")
                 }
                 .tag(1)
             
@@ -43,7 +43,7 @@ struct ContentView: View {
             // 設置視圖
             SettingsView()
                 .tabItem {
-                    Label("设置", systemImage: "gear")
+                    Label("設定", systemImage: "gear")
                 }
                 .tag(3)
         }
