@@ -25,7 +25,7 @@ struct EditTradeView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Strategy.name, ascending: true)],
         animation: .default)
     private var strategies: FetchedResults<Strategy>
-    
+    //// 初始化方法，设置状态变量的初始值
     init(trade: Trade) {
         self.trade = trade
         _selectedProduct = State(initialValue: trade.product)
@@ -96,18 +96,19 @@ struct EditTradeView: View {
     }
     
     private func saveChanges() {
+        // 更新交易对象的属性
         trade.product = selectedProduct
         trade.strategy = selectedStrategy
         trade.direction = direction
         trade.entryPrice = Double(entryPrice) ?? trade.entryPrice
         trade.stopLoss = Double(stopLoss) ?? trade.stopLoss
-        
+        // 设置进场日期和时间
         let calendar = Calendar.current
         trade.entryDate = calendar.date(bySettingHour: calendar.component(.hour, from: entryTime),
                                         minute: calendar.component(.minute, from: entryTime),
                                         second: 0,
                                         of: entryDate)
-        
+        // 设置出场日期和时间
         if let exitDate = exitDate, let exitTime = exitTime {
             trade.exitDate = calendar.date(bySettingHour: calendar.component(.hour, from: exitTime),
                                            minute: calendar.component(.minute, from: exitTime),
@@ -116,7 +117,7 @@ struct EditTradeView: View {
         } else {
             trade.exitDate = nil
         }
-        
+        // 保存更改
         do {
             try viewContext.save()
             presentationMode.wrappedValue.dismiss()
