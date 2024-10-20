@@ -27,7 +27,7 @@ struct ContentView: View {
             
             CalendarView()
                 .tabItem {
-                    Label("日历", systemImage: "calendar")
+                    Label("日曆", systemImage: "calendar")
                 }
                 .tag(2)
             
